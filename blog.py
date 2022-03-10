@@ -44,6 +44,14 @@ class Blog:
         else: 
             print("You must be logged in to perform this action. ")
 
+    def view_list(self):
+        if self.posts:
+            print("Here are posts you can choose from: ")
+            for post in self.posts:
+                print(f""" {post.id}    {post.title}""")
+        else:
+            print("Checking ...")
+
     def view_posts(self):
         if self.posts:
             for post in self.posts:
@@ -79,7 +87,7 @@ class Blog:
                     new_title = input("Please enter the new title: ")
                     post.update(title=new_title)
                 elif edit_part == 'body':
-                    new_body = input("Please enter the new boody: ")
+                    new_body = input("Please enter the new body: ")
                     post.update(body=new_body)
                 print(f"{post.title} has been updated")
             #if not author but user is logged in 
@@ -139,7 +147,7 @@ class Post:
         author -> User
         """
 
-        self.post_id = Post.id_counter
+        self.id = Post.id_counter
         self.id_counter += 1
         self.title = title
         self.body = body
@@ -180,10 +188,12 @@ def run_blog():
             elif to_do == '3':
                 my_blog.view_posts()
             elif to_do == '4':
-                post_id = int(input("What is the id of the post you would like to view?"))
+                my_blog.view_list()
+                post_id = int(input("What is the id of the post you would like to view? "))
                 my_blog.view_post(post_id)
             elif to_do == '5':
-                post_id = int(input("What is the id of the post you would like to delete?"))
+                my_blog.view_list()
+                post_id = int(input("What is the id of the post you would like to delete? "))
                 my_blog.delete_post(post_id)
         else:
             print("1. Log Out\n2. Create a Post\n3. View all Posts\n4. View Single Post\n5. Delete post\n6. Quit")
@@ -197,10 +207,12 @@ def run_blog():
             elif to_do == '3':
                 my_blog.view_posts()  
             elif to_do == '4':
-                post_id = int(input("What is the id of the post you would like to view?"))
+                my_blog.view_list()
+                post_id = int(input("What is the id of the post you would like to view? "))
                 my_blog.view_post(post_id) 
             elif to_do == '5':
-                post_id = int(input("What is the id of the post you would like to delete?"))
+                my_blog.view_list()
+                post_id = int(input("What is the id of the post you would like to delete? "))
                 my_blog.delete_post(post_id) 
             elif to_do == '6':
                 my_blog.log_user_out()
